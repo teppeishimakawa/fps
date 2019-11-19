@@ -5,6 +5,7 @@ var buffer=document.getElementById("buffer").getContext('2d');
 var video=document.getElementById("video");
 var img = document.getElementById('image');
 let frame = 0;
+var reader = new FileReader();
 
 //videoの縦幅横幅を取得
 var w = video.offsetWidth;
@@ -27,7 +28,17 @@ function draw()
     return;
     }
     buffer.drawImage(video, 0,0,1280,720);
-    img.src = document.getElementById("buffer").toDataURL('image/jpg')
+    img.src = document.getElementById("buffer").toDataURL('image/jpeg')
+     // canvasからbase64画像データを取得
+    var url=document.getElementById("buffer").toDataURL('image/jpeg');
+    const a = document.createElement("a");
+  　document.body.appendChild(a);
+  　a.style = "display:none";
+ 　 a.href = url;
+    a.click();
+    window.URL.revokeObjectURL(url); // release the used object.
+    a.parentNode.removeChild(a); // delete the temporary "a" element
+
 }
 
 
