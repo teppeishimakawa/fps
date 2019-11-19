@@ -11,6 +11,8 @@ var w = video.offsetWidth;
 var h = video.offsetHeight;
 document.getElementById("buffer").setAttribute("width", w);
 document.getElementById("buffer").setAttribute("height", h);
+document.getElementById("image").setAttribute("width", w);
+document.getElementById("image").setAttribute("height", h);
 
 document.getElementById("video").style.display="none";
 document.getElementById("buffer").style.display="none";
