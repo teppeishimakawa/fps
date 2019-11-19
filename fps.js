@@ -1,33 +1,28 @@
 
 
 
-var width=window.innerWidth;
-var height=window.innerHeight;
 var buffer=document.getElementById("buffer").getContext('2d');
+var video=document.getElementById("video");
 
+//videoの縦幅横幅を取得
+var w = video.offsetWidth;
+var h = video.offsetHeight;
+document.getElementById("buffer").setAttribute("width", w);
+document.getElementById("buffer").setAttribute("height", h);
 
-document.getElementById("buffer").style.display="none";
 document.getElementById("video").style.display="none";
-
+document.getElementById("buffer").style.display="none";
 
 function draw() {
     buffer.drawImage(video, 0, 0);
 
-    //Get alphadata
-    var image = buffer.getImageData(0, 0, width, height);
-    var imageData = image.data;
-    var alphaData = buffer.getImageData(0, 0, width, height).data;
-    //var alphaData = buffer.getImageData(0, height, width, height).data;
-
-    //Loop through pixels, replace data with alpha channel
-    //映像のアルファはアルファ動画のbチャンネルの値で決める。（白黒なのでr=g=bだから）
-    for (i = 3; i < imageData.length; i += 4)
+    document.getElementById("buffer").toBlob(function(blob)
     {
-        imageData[i] = alphaData[i-1];
-    }
+      var img = document.getElementById('image');
+      img.src = document.getElementById("buffer").toDataURL('image/png');
+    }, 'image/jpeg', 0.95);
 
-    //Output to second canvas
-    document.getElementById("output").getContext("2d").putImageData(image, 0, 0, 0, 0, width, height);
+
     requestAnimationFrame(draw)
 }
 
@@ -68,7 +63,7 @@ promise.then(successCallback)
 
 
 function successCallback(stream) {
-  bgvideo.srcObject = stream;
+  video.srcObject = stream;
  };
 
 function errorCallback(err) {
@@ -83,7 +78,6 @@ function errorCallback(err) {
        document.getElementById("video").play();
 
 
+setInterval(draw(),3000);
 
-document.getElementById("bgvideo").play();
-draw();
 
