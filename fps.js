@@ -4,15 +4,28 @@
 var buffer=document.getElementById("buffer").getContext('2d');
 var video=document.getElementById("video");
 var img = document.getElementById('image');
+let frame = 0;
 
-
+//videoの縦幅横幅を取得
+var w = video.offsetWidth;
+var h = video.offsetHeight;
+document.getElementById("buffer").setAttribute("width", w);
+document.getElementById("buffer").setAttribute("height", h);
 
 document.getElementById("video").style.display="none";
 document.getElementById("buffer").style.display="none";
 
-function draw() {
-    buffer.drawImage(video, 0, 0);
+
+function draw()
+{
     requestAnimationFrame(draw)
+    frame++;
+    if (frame % 60 == 0)
+    {
+    return;
+    }
+    buffer.drawImage(video, 0, 0);
+    img.src = document.getElementById("buffer").toDataURL('image/jpg')
 }
 
 
@@ -67,6 +80,6 @@ function errorCallback(err) {
        document.getElementById("video").play();
 
 draw()
-setInterval(function(){img.src = document.getElementById("buffer").toDataURL('image/jpg');},10000);
+
 
 
