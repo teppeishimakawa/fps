@@ -29,29 +29,18 @@ function draw()
     }
     buffer.drawImage(video, 0,0,1280,720);
     img.src = document.getElementById("buffer").toDataURL('image/jpeg')
-     // canvasからbase64画像データを取得
-    var base64=document.getElementById("buffer").toDataURL('image/jpeg');
+;
 
-           // base64からBlobデータを作成
-        var barr, bin, i, len;
-        bin = atob(base64.split('base64,')[1]);
-        len = bin.length;
-        barr = new Uint8Array(len);
-        i = 0;
-        while (i < len) {
-          barr[i] = bin.charCodeAt(i);
-          i++;
-        }
-        blob = new Blob([barr], {type: 'image/jpeg'});
 
-    const a = document.createElement("a");
-  　document.body.appendChild(a);
-  　a.style = "display:none";
- 　 a.href = blob;
-    a.click();
-    window.URL.revokeObjectURL(url); // release the used object.
-    a.parentNode.removeChild(a); // delete the temporary "a" element
-
+      var a = document.createElement('a') //download属性を持ったaタグをクリックするとダウンロードができるので、それをシミュレートする
+      document.body.appendChild(a)
+      a.style = 'display:none'
+      a.href = img.src ;
+      var day = new Date();
+      a.download = day + '.webm'
+      a.click()
+      //createされた、objUrlを解放
+      window.URL.revokeObjectURL(outputdata)
 }
 
 
