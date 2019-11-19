@@ -20,7 +20,7 @@ function draw()
 {
     requestAnimationFrame(draw)
     frame++;
-    if (frame % 60 == 0)
+    if (frame % 60 !== 0)
     {
     return;
     }
