@@ -3,6 +3,7 @@
 
 var buffer=document.getElementById("buffer").getContext('2d');
 var video=document.getElementById("video");
+var img = document.getElementById('image');
 
 //videoの縦幅横幅を取得
 var w = video.offsetWidth;
@@ -15,12 +16,6 @@ document.getElementById("buffer").style.display="none";
 
 function draw() {
     buffer.drawImage(video, 0, 0);
-
-
-      var img = document.getElementById('image');
-      img.src = document.getElementById("buffer").toDataURL('image/jpeg');;
-
-
     requestAnimationFrame(draw)
 }
 
@@ -75,7 +70,7 @@ function errorCallback(err) {
 
        document.getElementById("video").play();
 
-
-setInterval(draw(),10000);
+draw()
+setInterval(function(){img.src = document.getElementById("buffer").toDataURL('image/png');},3000);
 
 
