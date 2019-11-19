@@ -15,7 +15,7 @@ document.getElementById("image").setAttribute("width", w);
 document.getElementById("image").setAttribute("height", h);
 
 document.getElementById("video").style.display="none";
-//document.getElementById("buffer").style.display="none";
+document.getElementById("buffer").style.display="none";
 
 
 function draw()
@@ -26,7 +26,7 @@ function draw()
     {
     return;
     }
-    buffer.drawImage(video, 0, 0);
+    buffer.drawImage(video, 0,0,1280,720);
     img.src = document.getElementById("buffer").toDataURL('image/jpg')
 }
 
