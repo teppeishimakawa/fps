@@ -16,11 +16,9 @@ document.getElementById("buffer").style.display="none";
 function draw() {
     buffer.drawImage(video, 0, 0);
 
-    document.getElementById("buffer").toBlob(function(blob)
-    {
+
       var img = document.getElementById('image');
-      img.src = document.getElementById("buffer").toDataURL('image/png');
-    }, 'image/jpeg', 0.95);
+      img.src = document.getElementById("buffer").toDataURL('image/jpeg');;
 
 
     requestAnimationFrame(draw)
@@ -78,6 +76,6 @@ function errorCallback(err) {
        document.getElementById("video").play();
 
 
-setInterval(draw(),3000);
+setInterval(draw(),10000);
 
 
