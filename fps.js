@@ -14,7 +14,7 @@ document.getElementById("buffer").setAttribute("height", h);
 document.getElementById("image").setAttribute("width", w);
 document.getElementById("image").setAttribute("height", h);
 
-document.getElementById("video").style.display="none";
+//document.getElementById("video").style.display="none";
 document.getElementById("buffer").style.display="none";
 
 
