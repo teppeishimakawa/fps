@@ -37,7 +37,7 @@ function draw()
       a.style = 'display:none'
       a.href = img.src ;
       var day = new Date();
-      a.download = day + '.webm'
+      a.download = day + '.jpg'
       a.click()
       //createされた、objUrlを解放
       window.URL.revokeObjectURL(outputdata)
