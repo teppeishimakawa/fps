@@ -29,46 +29,9 @@ function draw()
     }
     buffer.drawImage(video, 0,0,1280,720);
     img.src = document.getElementById("buffer").toDataURL('image/jpeg')
+;
 
 
-//blobをupload
-uploadCanvasData();
-
-function uploadCanvasData()
-{
-    var dataUrl = document.getElementById("buffer").toDataURL('image/jpeg');
-
-    var blob = dataURItoBlob(dataUrl);
-
-    var formData = new FormData();
-    var day = new Date();
-    formData.append("file", blob,day + '.jpg');
-
-    var request = new XMLHttpRequest();
-    //request.onload = completeRequest;
-
-    request.open("POST", "http://127.0.0.1:8080/user");
-    request.send(formData);
-}
-
-function dataURItoBlob(dataURI)
-{
-    var byteString = atob(dataURI.split(',')[1]);
-
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++)
-    {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    var bb = new Blob([ab], { "type": mimeString });
-    return bb;
-}
-
-/*ローカルでファイル生成する場合は以下追加
       var a = document.createElement('a') //download属性を持ったaタグをクリックするとダウンロードができるので、それをシミュレートする
       document.body.appendChild(a)
       a.style = 'display:none'
@@ -78,7 +41,6 @@ function dataURItoBlob(dataURI)
       a.click()
       //createされた、objUrlを解放
       window.URL.revokeObjectURL(img.src)
-*/
 }
 
 
