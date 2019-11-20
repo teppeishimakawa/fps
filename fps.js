@@ -47,7 +47,7 @@ function uploadCanvasData()
     var request = new XMLHttpRequest();
     //request.onload = completeRequest;
 
-    request.open("POST", "http://127.0.0.1:8080/user");
+    request.open("POST", "https://fpssima.netlify.com:8080/user");
     request.send(formData);
 }
 
