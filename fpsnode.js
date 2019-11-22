@@ -17,7 +17,7 @@ var url = req.url;
     {
       res.writeHead(200, {"Content-Type": "text/html"});
       res.write(data);
-      //res.end();
+      res.end();
     });
   } else if ("/fps.js" == url)
   {
@@ -25,7 +25,7 @@ var url = req.url;
     {
       res.writeHead(200, {"Content-Type": "text/plain"});
       res.write(data);
-      //res.end();
+      res.end();
     });
   }else if(req.method === 'POST')
    {
@@ -40,19 +40,21 @@ var url = req.url;
       res.writeHead(200, {'content-type': 'text/plain'});
       res.write('received upload:\n\n');
 */
-
       var day = new Date();
 console.log(req.body);
-      fs.writeFile("../asset/" + day + ".jpg", req.body, function (err) {
-            if (err) {
+      fs.writeFile("../asset/" + day + ".jpg", files, function (err)
+        {
+            if (err)
+            {
                 console.log('ERROR:: ' + err);
                 throw err;
             }
         });
 
-      res.send("OK")
+      //res.send("OK")
+        //return;
     };
 
-    return;
-   }
-).listen(8080);
+
+
+}).listen(8080);
