@@ -4,9 +4,13 @@ var multiparty = require('multiparty');
 var http = require('http');
 var util = require('util');
 var fs = require('fs');
+var html = require('fs').readFileSync('/index.html');
 
 http.createServer(function(req, res)
 {
+
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    res.end(html);
 
 
   //req.url === 'http://127.0.0.1:8080/index.html' && req.method === 'POST'
