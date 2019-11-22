@@ -40,27 +40,25 @@ function uploadCanvasData()
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
     var buffer = new Uint8Array(bin.length);
-    for (var i = 0; i < bin.length; i++) {
-        buffer[i] = bin.charCodeAt(i);
+    for (var i = 0; i < bin.length; i++)
+    {
+      buffer[i] = bin.charCodeAt(i);
     }
     // Blobを作成
-    var blob = new Blob([buffer.buffer], {
-        type: "image/jpeg"
+    var blob = new Blob([buffer.buffer],
+    {
+     type: "image/jpeg"
     });
 
-/*
     var formData = new FormData();
     var day = new Date();
     formData.append("image", blob,day + '.jpg');
-*/
 
     var request = new XMLHttpRequest();
-    //request.onload = completeRequest;
 
     request.open("POST", "./fpsnode.js");
     request.responseType = 'blob';
-    request.send(blob);
-
+    request.send(formData);
 
 }
 
@@ -115,11 +113,13 @@ promise.then(successCallback)
        .catch(errorCallback);
 
 
-function successCallback(stream) {
+function successCallback(stream)
+ {
   video.srcObject = stream;
  };
 
-function errorCallback(err) {
+function errorCallback(err)
+ {
   alert(err);
  };
 
@@ -128,9 +128,11 @@ function errorCallback(err) {
 
 }
 
-       document.getElementById("video").play();
+document.getElementById("video").play();
 
 draw()
+
+
 
 
 

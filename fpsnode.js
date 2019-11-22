@@ -4,13 +4,14 @@ var multiparty = require('multiparty');
 var http = require('http');
 var util = require('util');
 var fs = require('fs');
-//var html = fs.readFileSync('./index.html');
 
 http.createServer(function(req, res)
 {
 
 var url = req.url;
   console.log(url);
+  console.log(req.method)
+
   if ("/" == url)
   {
     fs.readFile("./index.html", "UTF-8", function (err, data)
@@ -30,19 +31,16 @@ var url = req.url;
   }else if(req.method === 'POST')
    {
 
+      var form = new multiparty.Form();
 
-/*
-    // parse a file upload
-    var form = new multiparty.Form();
-
-    form.parse(req, function(err, fields, files)
-    {
-      res.writeHead(200, {'content-type': 'text/plain'});
+      form.parse(req, function(err, fields, files)
+      {
+      res.writeHead(200, {'content-type': 'image/jpeg'});
       res.write('received upload:\n\n');
-*/
+
       var day = new Date();
-console.log(req.body);
-      fs.writeFile("../asset/" + day + ".jpg", files, function (err)
+      console.log(files.image[0]);
+      fs.writeFile("tmp/" + day + ".jpg", fs.readFileSync(files.image[0].path), function (err)
         {
             if (err)
             {
@@ -50,11 +48,8 @@ console.log(req.body);
                 throw err;
             }
         });
-
-      //res.send("OK")
-        //return;
+      res.end(util.inspect({fields: fields, files: files}));
+      })
     };
 
-
-
-}).listen(8080);
+   }).listen(8080);
