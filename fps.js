@@ -23,7 +23,7 @@ function draw()
 {
     requestAnimationFrame(draw)
     frame++;
-    if (frame % 180 !== 0)
+    if (frame % 360 !== 0)
     {
     return;
     }
@@ -48,15 +48,20 @@ function uploadCanvasData()
         type: "image/jpeg"
     });
 
+/*
     var formData = new FormData();
     var day = new Date();
     formData.append("image", blob,day + '.jpg');
+*/
 
     var request = new XMLHttpRequest();
     //request.onload = completeRequest;
 
-    request.open("POST", "/fpsnode.js");
-    request.send(formData);
+    request.open("POST", "./fpsnode.js");
+    request.responseType = 'blob';
+    request.send(blob);
+
+
 }
 
 
