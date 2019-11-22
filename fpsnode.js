@@ -4,13 +4,30 @@ var multiparty = require('multiparty');
 var http = require('http');
 var util = require('util');
 var fs = require('fs');
-var html = require('fs').readFileSync('/index.html');
+//var html = fs.readFileSync('./index.html');
 
 http.createServer(function(req, res)
 {
 
-    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-    res.end(html);
+var url = req.url;
+  console.log(url);
+  if (‘/’ == url) {
+    fs.readFile(‘./js.html’, ‘UTF-8’, function (err, data) {
+      res.writeHead(200, {‘Content-Type’: ‘text/html’});
+      res.write(data);
+      res.end();
+    });
+  } else if (‘/fps.js’ == url) {
+    fs.readFile(‘./fps.js’, ‘UTF-8’, function (err, data) {
+      res.writeHead(200, {‘Content-Type’: ‘text/javascript’});
+      res.write(data);
+      res.end();
+    });
+  }
+
+
+    //res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    //res.end(html);
 
 
   //req.url === 'http://127.0.0.1:8080/index.html' && req.method === 'POST'
