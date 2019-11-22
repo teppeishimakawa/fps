@@ -1,0 +1,24 @@
+{
+  "name": "fps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fps.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node fpsnode.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teppeishimakawa/fps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teppeishimakawa/fps/issues"
+  },
+  "homepage": "https://github.com/teppeishimakawa/fps#readme",
+  "dependencies": {
+    "multiparty": "^4.2.1"
+  }
+}

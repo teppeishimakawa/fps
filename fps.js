@@ -28,7 +28,7 @@ function draw()
     return;
     }
     buffer.drawImage(video, 0,0,1280,720);
-    img.src = document.getElementById("buffer").toDataURL('image/jpeg')
+    //img.src = document.getElementById("buffer").toDataURL('image/jpeg')
 
 
 //blobをupload
@@ -36,37 +36,30 @@ uploadCanvasData();
 
 function uploadCanvasData()
 {
-    var dataUrl = document.getElementById("buffer").toDataURL('image/jpeg');
-
-    var blob = dataURItoBlob(dataUrl);
+    var base64 = document.getElementById("buffer").toDataURL('image/jpeg');
+    // Base64からバイナリへ変換
+    var bin = atob(base64.replace(/^.*,/, ''));
+    var buffer = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i);
+    }
+    // Blobを作成
+    var blob = new Blob([buffer.buffer], {
+        type: "image/jpeg"
+    });
 
     var formData = new FormData();
     var day = new Date();
-    formData.append("file", blob,day + '.jpg');
+    formData.append("image", blob,day + '.jpg');
 
     var request = new XMLHttpRequest();
     //request.onload = completeRequest;
 
-    request.open("POST", "https://fpssima.netlify.com:8080/user");
+    request.open("POST", "/fpsnode.js");
     request.send(formData);
 }
 
-function dataURItoBlob(dataURI)
-{
-    var byteString = atob(dataURI.split(',')[1]);
 
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++)
-    {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    var bb = new Blob([ab], { "type": mimeString });
-    return bb;
-}
 
 /*ローカルでファイル生成する場合は以下追加
       var a = document.createElement('a') //download属性を持ったaタグをクリックするとダウンロードができるので、それをシミュレートする
