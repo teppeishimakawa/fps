@@ -52,6 +52,9 @@ function stp()
 {
     flg=1;
     document.getElementById("video").style.display="";
+    video.style.width=String(w)/3 + "px";
+    video.style.height=String(h)/3 + "px";
+
 
 }
 
