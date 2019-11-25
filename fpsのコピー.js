@@ -5,6 +5,7 @@ var video=document.getElementById("video");
 var img = document.getElementById('image');
 let frame = 0;
 var reader = new FileReader();
+var flg=0;
 
 //videoの縦幅横幅を取得
 var w = video.offsetWidth;
@@ -14,7 +15,7 @@ document.getElementById("buffer").setAttribute("height", h);
 document.getElementById("image").setAttribute("width", w);
 document.getElementById("image").setAttribute("height", h);
 
-document.getElementById("video").style.display="none";
+document.getElementById("video").style.display="";
 document.getElementById("buffer").style.display="none";
 
 
@@ -30,11 +31,12 @@ function draw()
     //img.src = document.getElementById("buffer").toDataURL('image/jpeg')
 
 
-//blobをupload
-uploadCanvasData();
+
 
 function uploadCanvasData()
 {
+  if(flg == 1){return false}else
+  {
     var base64 = document.getElementById("buffer").toDataURL('image/jpeg');
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
@@ -58,7 +60,6 @@ function uploadCanvasData()
     request.open("POST", "./fpsnode.js");
     request.send(formData);
 
-
 }
 
 
@@ -74,9 +75,23 @@ function uploadCanvasData()
       //createされた、objUrlを解放
       window.URL.revokeObjectURL(img.src)
 */
+  
+}
+
+  
+function stt()
+{
+    flg=0;
+    document.getElementById("video").style.display="none";
+    uploadCanvasData();
 }
 
 
+function stp()
+{
+    document.getElementById("video").style.display="";
+    flg=1;
+}
 
 
 const medias =
@@ -126,8 +141,5 @@ function errorCallback(err) {
 }
 
        document.getElementById("video").play();
-
-draw()
-
 
 
