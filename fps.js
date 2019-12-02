@@ -1,6 +1,4 @@
 
-
-
 var buffer=document.getElementById("buffer").getContext('2d');
 var canvas=document.getElementById("buffer");
 var video=document.getElementById("video");
@@ -41,7 +39,7 @@ uploadCanvasData();
       window.URL.revokeObjectURL(img.src)
 */
   }
-
+  
   function stt()
 {
     flg=0;
@@ -56,6 +54,7 @@ function stp()
     document.getElementById("video").style.display="";
     video.style.width=String(w)/3 + "px";
     video.style.height=String(h)/3 + "px";
+
 
 }
 
@@ -103,14 +102,14 @@ promise.then(successCallback)
 function successCallback(stream)
  {
   video.srcObject = stream;
-
+   
 
   var settings = stream.getVideoTracks()[0].getSettings();
   w = settings.width;
-  h = settings.height;
-
+  h = settings.height;  
+   
    console.log(w);
-
+   
   //w=1536;
   //h=2048;
 
@@ -154,8 +153,8 @@ function uploadCanvasData()
   if(flg == 1){stp()}else
   {
     var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
-
-
+  
+  
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
     var buffer = new Uint8Array(bin.length);
@@ -182,9 +181,3 @@ function uploadCanvasData()
    }
 
 }
-
-
-
-
-
-
