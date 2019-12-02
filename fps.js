@@ -10,6 +10,8 @@ var flg=1;
 var w;
 var h;
 
+document.getElementById("alive").style.display="none";
+
 
 function draw()
 {
@@ -39,12 +41,13 @@ uploadCanvasData();
       window.URL.revokeObjectURL(img.src)
 */
   }
-  
+
   function stt()
 {
     flg=0;
     document.getElementById("video").style.display="none";
     uploadCanvasData();
+    document.getElementById("alive").style.display="";
 }
 
 
@@ -54,7 +57,7 @@ function stp()
     document.getElementById("video").style.display="";
     video.style.width=String(w)/3 + "px";
     video.style.height=String(h)/3 + "px";
-
+    document.getElementById("alive").style.display="none";
 
 }
 
@@ -121,6 +124,7 @@ document.getElementById("image").setAttribute("height", h);
 document.getElementById("video").style.display="none";
 document.getElementById("buffer").style.display="none";
 
+
 /*
 canvas.width *= devicePixelRatio;
 canvas.height *= devicePixelRatio;
@@ -181,3 +185,6 @@ function uploadCanvasData()
    }
 
 }
+
+
+
