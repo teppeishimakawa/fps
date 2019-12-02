@@ -1,9 +1,11 @@
 fps使い方
 
+--サーバ側--------------
 ■サーバにindex.html,fps.js,fpsnode.js格納。node.js本体とmultipartyの
 　パッケージもサーバにインストール。
+-----------------------
 
-——ローカル側——
+——ローカル側——----------
 ■AppleScriptエディタ有効化
 システム環境設定→セキュリティとプライバシー
 →アクセシビリティ→プライバシーの中にAppleScriptエディタ(スクリプトエディタ)を登録
@@ -15,3 +17,7 @@ fps使い方
 ■Automator有効
 基本自動で有効だが、chrome起動しなかったらfpsLoadをクリック。止める
 時はfpsUnload
+----------------------
+
+*bash,chromeopen.sh,test.plistのpermission chmod 755忘れずに
+*利用システム:node.js,multiparty,automator,launchd,bash,AppleScript
