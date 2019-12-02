@@ -2,66 +2,31 @@
 
 
 var buffer=document.getElementById("buffer").getContext('2d');
+var canvas=document.getElementById("buffer");
 var video=document.getElementById("video");
 var img = document.getElementById('image');
 let frame = 0;
 var reader = new FileReader();
+var flg=1;
 
-//videoの縦幅横幅を取得
-var w = video.offsetWidth;
-var h = video.offsetHeight;
-document.getElementById("buffer").setAttribute("width", w);
-document.getElementById("buffer").setAttribute("height", h);
-document.getElementById("image").setAttribute("width", w);
-document.getElementById("image").setAttribute("height", h);
-
-document.getElementById("video").style.display="none";
-document.getElementById("buffer").style.display="none";
+var w;
+var h;
 
 
 function draw()
 {
     requestAnimationFrame(draw)
     frame++;
-    if (frame % 360 !== 0)
+    if (frame % 60 !== 0)
     {
     return;
     }
-    buffer.drawImage(video, 0,0,1280,720);
+    buffer.drawImage(video, 0,0,w,h);
     //img.src = document.getElementById("buffer").toDataURL('image/jpeg')
 
 
-//blobをupload
+
 uploadCanvasData();
-
-function uploadCanvasData()
-{
-    var base64 = document.getElementById("buffer").toDataURL('image/jpeg');
-    // Base64からバイナリへ変換
-    var bin = atob(base64.replace(/^.*,/, ''));
-    var buffer = new Uint8Array(bin.length);
-    for (var i = 0; i < bin.length; i++)
-    {
-      buffer[i] = bin.charCodeAt(i);
-    }
-    // Blobを作成
-    var blob = new Blob([buffer.buffer],
-    {
-     type: "image/jpeg"
-    });
-
-    var formData = new FormData();
-    var day = new Date();
-    formData.append("image", blob,day + '.jpg');
-
-    var request = new XMLHttpRequest();
-
-    request.open("POST", "./fpsnode.js");
-    request.responseType = 'blob';
-    request.send(formData);
-
-}
-
 
 
 /*ローカルでファイル生成する場合は以下追加
@@ -75,7 +40,27 @@ function uploadCanvasData()
       //createされた、objUrlを解放
       window.URL.revokeObjectURL(img.src)
 */
+  }
+
+  function stt()
+{
+    flg=0;
+    document.getElementById("video").style.display="none";
+    uploadCanvasData();
 }
+
+
+function stp()
+{
+    flg=1;
+    document.getElementById("video").style.display="";
+    video.style.width=String(w)/3 + "px";
+    video.style.height=String(h)/3 + "px";
+
+}
+
+//draw
+
 
 
 
@@ -85,7 +70,9 @@ const medias =
   audio: false,
   video: {
     facingMode: "environment",
-    aspectRatio: {exact: 1.7777777778}
+        width: { ideal: 1920 },
+        height: { ideal: 1080 }
+    //aspectRatio: {exact: 1.7777777778}
     //facingMode: "user" // フロントカメラにアクセス
   }
 };
@@ -116,7 +103,35 @@ promise.then(successCallback)
 function successCallback(stream)
  {
   video.srcObject = stream;
- };
+
+
+  var settings = stream.getVideoTracks()[0].getSettings();
+  w = settings.width;
+  h = settings.height;
+
+   console.log(w);
+
+  //w=1536;
+  //h=2048;
+
+document.getElementById("buffer").setAttribute("width", w);
+document.getElementById("buffer").setAttribute("height", h);
+document.getElementById("image").setAttribute("width", w);
+document.getElementById("image").setAttribute("height", h);
+
+document.getElementById("video").style.display="none";
+document.getElementById("buffer").style.display="none";
+
+/*
+canvas.width *= devicePixelRatio;
+canvas.height *= devicePixelRatio;
+
+canvas.style.width = String(canvas.width / devicePixelRatio) + "px";
+canvas.style.height = String(canvas.height / devicePixelRatio) + "px";
+*/
+
+
+ }
 
 function errorCallback(err)
  {
@@ -131,6 +146,43 @@ function errorCallback(err)
 document.getElementById("video").play();
 
 draw()
+
+
+
+function uploadCanvasData()
+{
+  if(flg == 1){stp()}else
+  {
+    var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
+
+
+    // Base64からバイナリへ変換
+    var bin = atob(base64.replace(/^.*,/, ''));
+    var buffer = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++)
+    {
+      buffer[i] = bin.charCodeAt(i);
+    }
+    // Blobを作成
+    var blob = new Blob([buffer.buffer],
+    {
+     type: "image/jpeg"
+    });
+
+    var formData = new FormData();
+    var day = new Date();
+    formData.append("image", blob,day + '.jpg');
+
+    var request = new XMLHttpRequest();
+
+    request.open("POST", "./fpsnode.js");
+    request.responseType = 'blob';
+    request.send(formData);
+
+   }
+
+}
+
 
 
 
