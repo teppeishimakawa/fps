@@ -42,15 +42,15 @@ uploadCanvasData();
 */
   }
 
-/*
+
   function stt()
 {
-*/
+
     flg=0;
     document.getElementById("video").style.display="none";
     uploadCanvasData();
     document.getElementById("alive").style.display="";
-//}
+}
 
 
 function stp()
