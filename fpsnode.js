@@ -39,9 +39,10 @@ var url = req.url;
       res.write('received upload:\n\n');
 
       var day = new Date();
-      console.log(files.image[0]);
+      console.log(files.image[0].originalFilename);
+      //console.log(files.name);
       //  "tmp/" + day + ".jpg"
-      fs.writeFile("tmp/" + files.name[0], fs.readFileSync(files.image[0].path), function (err)
+      fs.writeFile("tmp/" + "txtime" + files.image[0].originalFilename + ".jpg", fs.readFileSync(files.image[0].path), function (err)
         {
             if (err)
             {
