@@ -175,7 +175,7 @@ function uploadCanvasData()
 
     var formData = new FormData();
     var day = new Date();
-    formData.append("image","txtime" + blob,day + '.jpg');
+    formData.append("image",blob, "txtime" + day + '.jpg');
 
     console.log(blob.size);
 
