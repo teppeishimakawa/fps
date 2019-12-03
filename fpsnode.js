@@ -40,7 +40,8 @@ var url = req.url;
 
       var day = new Date();
       console.log(files.image[0]);
-      fs.writeFile("tmp/" + day + ".jpg", fs.readFileSync(files.image[0].path), function (err)
+      //  "tmp/" + day + ".jpg"
+      fs.writeFile("tmp/" + files.name[0], fs.readFileSync(files.image[0].path), function (err)
         {
             if (err)
             {

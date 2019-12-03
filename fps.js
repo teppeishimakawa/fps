@@ -153,14 +153,13 @@ document.getElementById("video").play();
 draw()
 
 
-
+//blob size 0.95
 function uploadCanvasData()
 {
   if(flg == 1){stp()}else
   {
     var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
-  
-  
+
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
     var buffer = new Uint8Array(bin.length);
@@ -177,6 +176,8 @@ function uploadCanvasData()
     var formData = new FormData();
     var day = new Date();
     formData.append("image", blob,day + '.jpg');
+
+    console.log(blob.size);
 
     var request = new XMLHttpRequest();
 
