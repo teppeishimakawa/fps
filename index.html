@@ -4,6 +4,32 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
 <style>
+#alive
+{
+   background-color: #008b8b;   /* 背景色指定 */
+   color: #ffffff;
+   font-family:arial, sans-serif;
+   font-weight: bold;
+   position: absolute;          /* 位置指定 */
+   padding: 20px;               /* 余白指定 */
+   top:  0;                     /* 位置指定 */
+   bottom:  0;                  /* 位置指定 */
+   left:  0;                    /* 位置指定 */
+   right:  0;                   /* 位置指定 */
+   margin:  auto;               /* 中央寄せ */
+   text-align:center;
+   width:  50px;               /* 幅指定 */
+   height: 20px;                /* 高さ指定 */
+
+   opacity: 1;
+   animation: fade 4s linear;
+   animation-iteration-count: infinite;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
 
 </style>
 
@@ -11,8 +37,14 @@
 </head>
 
 <body>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+
+
+<div id="alive" >TX...</div>
 <input type="button" onclick="stt()" id="stt" value="start">
 <input type="button" onclick="stp()" id="stp" value="stop">
+<a href="/index2.html">index</a>
 <canvas id="buffer"></canvas>
 <video muted playsinline id="video"></video>
 <img id="image" >

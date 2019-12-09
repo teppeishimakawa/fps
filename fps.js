@@ -5,10 +5,12 @@ var video=document.getElementById("video");
 var img = document.getElementById('image');
 let frame = 0;
 var reader = new FileReader();
-var flg=1;
+var flgg=1;
 
 var w;
 var h;
+
+document.getElementById("alive").style.display="none";
 
 
 function draw()
@@ -39,27 +41,34 @@ uploadCanvasData();
       window.URL.revokeObjectURL(img.src)
 */
   }
-  
+
+
+
+
   function stt()
 {
-    flg=0;
+
+    flgg=0;
     document.getElementById("video").style.display="none";
     uploadCanvasData();
+    document.getElementById("alive").style.display="";
 }
 
 
 function stp()
 {
-    flg=1;
+    flgg=1;
     document.getElementById("video").style.display="";
     video.style.width=String(w)/3 + "px";
     video.style.height=String(h)/3 + "px";
-
+    document.getElementById("alive").style.display="none";
 
 }
 
 //draw
 
+//stt();
+//stp();
 
 
 
@@ -121,6 +130,7 @@ document.getElementById("image").setAttribute("height", h);
 document.getElementById("video").style.display="none";
 document.getElementById("buffer").style.display="none";
 
+
 /*
 canvas.width *= devicePixelRatio;
 canvas.height *= devicePixelRatio;
@@ -147,14 +157,13 @@ document.getElementById("video").play();
 draw()
 
 
-
+//blob size 0.95
 function uploadCanvasData()
 {
-  if(flg == 1){stp()}else
+  if(flgg == 1){stp()}else
   {
     var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
-  
-  
+
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
     var buffer = new Uint8Array(bin.length);
@@ -170,7 +179,9 @@ function uploadCanvasData()
 
     var formData = new FormData();
     var day = new Date();
-    formData.append("image", blob,day + '.jpg');
+    formData.append("image",blob, "txtime" + day + '.jpg');
+
+    console.log(blob.size);
 
     var request = new XMLHttpRequest();
 
@@ -181,3 +192,30 @@ function uploadCanvasData()
    }
 
 }
+
+
+
+var socket = io.connect();
+setInterval(function()
+{
+socket.emit("client_to_server", "poling");
+socket.on("server_to_client", function(data)
+  {
+    console.log("rxdata:" + data)
+    console.log(status);
+  //data:トリガ信号,flgg:再生ステータス1がstp
+    if((data == "1") && (flgg == 1))
+    {
+    //localStorage.setItem('status', '1');
+    flgg=0
+    stt();
+    //location.reload();
+    }else if(data == "1" && flgg == 0){
+      
+    }else if(data == "0"){
+    stp();
+    };
+  });
+
+},10000);
+
