@@ -37,9 +37,14 @@
 </head>
 
 <body>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+
+
 <div id="alive" >TX...</div>
 <input type="button" onclick="stt()" id="stt" value="start">
 <input type="button" onclick="stp()" id="stp" value="stop">
+<a href="/index2.html">index</a>
 <canvas id="buffer"></canvas>
 <video muted playsinline id="video"></video>
 <img id="image" >

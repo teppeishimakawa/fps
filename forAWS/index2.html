@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" >
+  <head>
+    <meta charset="utf-8">
+    <title>KproCont</title>
+  </head>
+  <body>
+    <h1>marathon control sys</h1>
+
+    <button id="sttbtn">start</button>
+    <button id="stpbtn">stop</button>
+    <p>start,stopの10秒後reloadでrec状態が確認できます</p>
+    <p>rec status:</p>
+    <script>
+    document.getElementById("sttbtn").onclick=function()
+    {
+    var json = {};
+    json.flg = "1";
+    var request = new XMLHttpRequest();
+    var jsonText = JSON.stringify(json); // ここで、dataをJSON文字列に変換
+///////↓南部さん:ここのurlを利用するサーバのurlに変更してください↓//////////////////////
+    request.open("POST", "https://fpssima.name/");
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(jsonText);
+
+    }
+
+        document.getElementById("stpbtn").onclick=function()
+    {
+    var json = {};
+    json.flg = "0";
+    var request = new XMLHttpRequest();
+    var jsonText = JSON.stringify(json); // ここで、dataをJSON文字列に変換
+////↓南部さん:ここのurlを利用するサーバのurlに変更してください↓//////////////////////
+    request.open("POST", "https://fpssima.name/");
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(jsonText);
+
+    }
+    </script>
+    <script></script>
+  </body>
+</html>

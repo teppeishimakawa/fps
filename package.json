@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/teppeishimakawa/fps#readme",
   "dependencies": {
-    "multiparty": "^4.2.1"
+    "multiparty": "^4.2.1",
+    "socket.io": "^2.3.0"
   }
 }

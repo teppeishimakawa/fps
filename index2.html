@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" >
+  <head>
+    <meta charset="utf-8">
+    <title>KproCont</title>
+  </head>
+  <body>
+    <h1>marathon control sys</h1>
+
+    <button id="sttbtn">start</button>
+    <button id="stpbtn">stop</button>
+    <script>
+    document.getElementById("sttbtn").onclick=function()
+    {
+    var json = {};
+    json.flg = "1";
+    var request = new XMLHttpRequest();
+    var jsonText = JSON.stringify(json); // ここで、dataをJSON文字列に変換
+    request.open("POST", "https://teppeishimakawa-fps.glitch.me");
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(jsonText);
+
+    }
+      
+        document.getElementById("stpbtn").onclick=function()
+    {
+    var json = {};
+    json.flg = "0";
+    var request = new XMLHttpRequest();
+    var jsonText = JSON.stringify(json); // ここで、dataをJSON文字列に変換
+    request.open("POST", "https://teppeishimakawa-fps.glitch.me");
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(jsonText);
+
+    }
+    </script>
+    <script></script>
+  </body>
+</html>

@@ -16,7 +16,7 @@
 
 open -a 'Google Chrome'
 #appleScriptでchrome画面アクティブ、url入力、エンター
-osascript -e 'tell application "Google Chrome" to activate' -e 'tell application "System Events" to keystroke "https://teppeishimakawa-fps.glitch.me"&return'
+osascript -e 'tell application "Google Chrome" to activate' -e 'tell application "System Events" to keystroke "https://fpssima.name"&return'
 
 #open "http://yahoo.co.jp"
 

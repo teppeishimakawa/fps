@@ -5,7 +5,7 @@ var video=document.getElementById("video");
 var img = document.getElementById('image');
 let frame = 0;
 var reader = new FileReader();
-var flg=1;
+var flgg=1;
 
 var w;
 var h;
@@ -43,10 +43,12 @@ uploadCanvasData();
   }
 
 
+
+
   function stt()
 {
 
-    flg=0;
+    flgg=0;
     document.getElementById("video").style.display="none";
     uploadCanvasData();
     document.getElementById("alive").style.display="";
@@ -55,7 +57,7 @@ uploadCanvasData();
 
 function stp()
 {
-    flg=1;
+    flgg=1;
     document.getElementById("video").style.display="";
     video.style.width=String(w)/3 + "px";
     video.style.height=String(h)/3 + "px";
@@ -65,6 +67,8 @@ function stp()
 
 //draw
 
+//stt();
+//stp();
 
 
 
@@ -156,7 +160,7 @@ draw()
 //blob size 0.95
 function uploadCanvasData()
 {
-  if(flg == 1){stp()}else
+  if(flgg == 1){stp()}else
   {
     var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
 
@@ -190,4 +194,28 @@ function uploadCanvasData()
 }
 
 
+
+var socket = io.connect();
+setInterval(function()
+{
+socket.emit("client_to_server", "poling");
+socket.on("server_to_client", function(data)
+  {
+    console.log("rxdata:" + data)
+    console.log(status);
+  //data:トリガ信号,flgg:再生ステータス1がstp
+    if((data == "1") && (flgg == 1))
+    {
+    //localStorage.setItem('status', '1');
+    flgg=0
+    stt();
+    //location.reload();
+    }else if(data == "1" && flgg == 0){
+      
+    }else if(data == "0"){
+    stp();
+    };
+  });
+
+},10000);
 
