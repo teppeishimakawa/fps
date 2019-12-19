@@ -157,12 +157,12 @@ document.getElementById("video").play();
 draw()
 
 
-//blob size 0.95
+//blob size 0.8
 function uploadCanvasData()
 {
   if(flgg == 1){stp()}else if(flgg == 0)
   {
-    var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.95);
+    var base64 = document.getElementById("buffer").toDataURL('image/jpeg',0.8);
 
     // Base64からバイナリへ変換
     var bin = atob(base64.replace(/^.*,/, ''));
