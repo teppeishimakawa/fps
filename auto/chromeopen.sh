@@ -13,12 +13,11 @@
 # -Wはchrome立ち上がっていない場合にアプリ開くoption
 
 #open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chromefps
-
+osascript -e 'tell application "System Events" to key code 102'
 open -a 'Google Chrome'
 #appleScriptでchrome画面アクティブ、url入力、エンター
 osascript -e 'tell application "Google Chrome" to activate'
 osascript -e 'tell application "System Events" to keystroke "https://fpssima.name"'
-osascript -e 'tell application "System Events" to key code 102'
 osascript -e 'tell application "System Events" to keystroke return'
 #open "http://yahoo.co.jp"
 
