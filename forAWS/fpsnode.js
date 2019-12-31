@@ -97,14 +97,15 @@ var url = req.url;
         flg = Object.assign(data.flg);
         console.log(flg)
         });     
-    }  
+    } 
+
 
   
    }).listen(8080);
 
 
 //poling
-//clientに向けてstart:flg 1,stop:flg 0送信
+//html2より受けたデータをclientに向けてstart:flg 1,stop:flg 0送信
 var socketio = require('socket.io');
 var io = socketio.listen(server);
 io.sockets.on('connection', function(socket) 
@@ -115,6 +116,7 @@ io.sockets.on('connection', function(socket)
         console.log("rxdata:" + data);
         io.sockets.emit('server_to_client',flg);
       //html２からの制御信号on,off判定
+      //htmlでrec開始したらサーバに"rec_on"返す。その後recflgを変える
         if(data == "rec_on"){recflg = 1;}else if(data == "rec_off"){recflg = 0;}
     });
 });

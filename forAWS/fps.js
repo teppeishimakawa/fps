@@ -209,6 +209,7 @@ socket.on("server_to_client", function(data)
     flgg=0
     stt();
     console.log("rxdata:" + data);
+    //htmlからrec_on,offのackをサーバに返す
     socket.emit("client_to_server", "rec_on");
     //location.reload();
     }else if(data == "1" && flgg == 0){

@@ -21,6 +21,7 @@
 ///////↓南部さん:ここのurlを利用するサーバのurlに変更してください↓//////////////////////
     request.open("POST", "https://fpssima.name/");
     request.setRequestHeader('Content-Type', 'application/json');
+	        request.setRequestHeader('Access-Control-Allow-Origin',"*");
     request.send(jsonText);
 
     }
