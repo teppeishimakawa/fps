@@ -19,6 +19,8 @@ open -a 'Google Chrome'
 osascript -e 'tell application "Google Chrome" to activate'
 osascript -e 'tell application "System Events" to keystroke "https://fpssima.name"'
 osascript -e 'tell application "System Events" to keystroke return'
+sleep 60
+osascript -e 'tell application "Google Chrome" to reload active tab of window 1'
 #open "http://yahoo.co.jp"
 
 #https://teppeishimakawa-fps.glitch.me

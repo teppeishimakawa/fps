@@ -10,6 +10,11 @@ var recflg=null;
 
 var server=http.createServer(function(req, res)
 {
+  //これがないとindex2.htmlをreloadした時にpostがoptionsで飛んじゃう
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Request-Method', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+  res.setHeader('Access-Control-Allow-Headers', '*')
 
 var url = req.url;
   console.log(url);
@@ -23,7 +28,8 @@ var url = req.url;
       res.write(data);
       res.end();
     });
-  } else if ("/fps.js" == url)
+  }
+   else if ("/fps.js" == url)
   {
     fs.readFile("./fps.js", "UTF-8", function (err, data)
     {
@@ -67,6 +73,8 @@ var url = req.url;
     fs.readFile("./index2.html", "UTF-8", function (err, data)
     {
       res.writeHead(200, {"Content-Type": "text/html"});
+
+      
       if(recflg == 1)
       {
       res.write(data.replace("<p>rec status:</p>","<p>rec status:on ok!</p>"));

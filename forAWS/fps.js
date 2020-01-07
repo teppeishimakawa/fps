@@ -17,7 +17,7 @@ function draw()
 {
     requestAnimationFrame(draw)
     frame++;
-    if (frame % 60 !== 0)
+    if (frame % 30 !== 0)
     {
     return;
     }
@@ -179,6 +179,7 @@ function uploadCanvasData()
 
     var formData = new FormData();
     var day = new Date();
+
     formData.append("image",blob, "txtime" + day + '.jpg');
 
     console.log(blob.size);
@@ -202,7 +203,7 @@ socket.emit("client_to_server", "poling");
 socket.on("server_to_client", function(data)
   {
     //console.log(status);
-  //data:トリガ信号,flgg:再生ステータス1がstp
+  //data:トリガ信号。1:再生 0:停止,  flgg:0:再生 1:停止
     if((data == "1") && (flgg == 1))
     {
     //localStorage.setItem('status', '1');
@@ -219,9 +220,13 @@ socket.on("server_to_client", function(data)
     console.log("rxdata:" + data);
     socket.emit("client_to_server", "rec_off");
     };
+
   });
   
 
 
 },10000);
+
+
+
 
